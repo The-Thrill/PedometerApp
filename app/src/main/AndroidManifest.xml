@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pedometer">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
+        android:name=".AppBase.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,14 +14,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pedometer">
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".Activity.SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity.MainActivity"
+            android:screenOrientation="portrait"/>
+
+        <service
+            android:name=".Service.StepService"
+            android:process=":remote"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.example.pedometer.StepService"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
